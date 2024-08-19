@@ -38,9 +38,26 @@ cursor = conexao.cursor()
         #print(usuario)
 
 ## Alterando dado da tabela 
-cursor.execute('UPDATE usuario SET endereco="Minas Gerais" WHERE nome="João"')
+    #cursor.execute('UPDATE usuario SET endereco="Minas Gerais" WHERE nome="João"')
 
-#envio das informações
+## Ordenando em ordem descrecente (sem o DESC, crescente)
+    #dados = cursor.execute('SELECT * FROM usuario ORDER BY nome DESC')
+    #for usuario in dados:
+        #print(usuario)   
+
+## Limitando as informações
+    #dados = cursor.execute('SELECT * FROM usuario LIMIT 2')
+    #for usuario in dados:
+        #print(usuario)
+
+## Retornar informações diferentes
+dados = cursor.execute('SELECT DISTINCT* FROM usuario')
+for usuario in dados:
+    print(usuario)   
+
+
+
+#Envio das informações/alterações para o banco 
 conexao.commit()
-#finalizar para não dar conflito!!!
+#inalizar para não dar conflito!!!
 conexao.close
