@@ -40,13 +40,43 @@ dados_2 = cursor.execute('SELECT count(nome) FROM alunos')
 for alunos in dados_2:
     print(alunos)
 
-# Atualização e Remoção
+#4. Atualização e Remoção
 #a) Atualize a idade de um aluno
 #cursor.execute('UPDATE alunos SET idade="26" WHERE nome="Pedro" ')
 
 #b) Remova um aluno pelo seu ID
-cursor.execute('DELETE FROM alunos WHERE id=5')
+#cursor.execute('DELETE FROM alunos WHERE id=5')
+
+#5. Criar uma tabela e inserir dados
+#cursor.execute('CREATE TABLE clientes(id INT PRIMARY KEY, nome VARCHAR(100),idade INT, saldo FLOAT)')
+#cursor.execute('INSERT INTO clientes(id,nome,idade,saldo) VALUES(3, "Patricia", 32, 22100)')
+
+#6. Consultas e Funções agregadas
+print("6. CONSULTAS E FUNÇÕES AGREGADAS")
+print("a) Selecionar nome e idade dos clientes com idade superior a 30 anos")
+#dados_3 = cursor.execute('SELECT nome,idade FROM clientes WHERE idade>30')
+dados_maior30 = cursor.execute('SELECT nome,idade FROM clientes GROUP BY idade HAVING idade>30')
+for clientes in dados_maior30:
+    print(clientes)
+
+print("b) Calcule o saldo médio dos clientes")
+dados_media_saldo = cursor.execute('SELECT avg(saldo) FROM clientes')
+for clientes in dados_media_saldo:
+    print(clientes)
+
+print("c) Encontre o cliente com o saldo máximo")
+dados_max_saldo = cursor.execute('SELECT nome,max(saldo) FROM clientes')
+for clientes in dados_max_saldo:
+    print(clientes)
+
+print("d) Conte quantos clientes tem acima de 1000")
+dados_max_saldo = cursor.execute('SELECT count(nome) FROM clientes WHERE saldo>1000')
+for clientes in dados_max_saldo:
+    print(clientes)
+
+
+
 #Envio das informações/alterações para o banco 
 conexao.commit()
-#inalizar para não dar conflito!!!
+#Finalizar para não dar conflito!!!
 conexao.close
