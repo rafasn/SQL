@@ -74,7 +74,13 @@ dados_max_saldo = cursor.execute('SELECT count(nome) FROM clientes WHERE saldo>1
 for clientes in dados_max_saldo:
     print(clientes)
 
+#7. Atualização e Remoção com condição
+#cursor.execute('UPDATE clientes SET saldo="30000" WHERE nome="Roberta" ')
+#cursor.execute('DELETE FROM clientes WHERE id=1')
 
+#8. JUNÇÃO DE TABELAS
+cursor.execute('CREATE TABLE compras(id INT PRIMARY KEY, cliente_id INT, produto VARCHAR(100), valor FLOAT)')
+FOREIGN KEY(cliente_id) REFERENCES clientes(id);
 
 #Envio das informações/alterações para o banco 
 conexao.commit()
