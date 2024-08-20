@@ -80,7 +80,12 @@ cursor = conexao.cursor()
         #E tem o RIGHT JOIN
 
     ## Retorna todas as linhas, junção completa [FULL JOIN]
-dados = cursor.execute('SELECT * FROM usuario FULL JOIN gerentes ON usuario.nome = gerentes.nome') 
+        #dados = cursor.execute('SELECT * FROM usuario FULL JOIN gerentes ON usuario.nome = gerentes.nome') 
+        #for usuario in dados:
+            #print(usuario)
+
+## Sub consultas 
+dados = cursor.execute('SELECT * FROM usuario WHERE nome IN (SELECT nome FROM gerentes)') 
 for usuario in dados:
     print(usuario)
 
