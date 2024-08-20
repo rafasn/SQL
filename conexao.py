@@ -6,10 +6,10 @@ conexao = sqlite3.connect('banco1')
 # Passando a conexao para outra variavel
 cursor = conexao.cursor()
 
-## Criando a tabebela
+## Criando a tabela
     #cursor.execute('CREATE TABLE usuarios(id int, nome VARCHAR(100),endereco VARCHAR(100), email VARCHAR(100));')
     #cursor.execute('CREATE TABLE prudutos(id int, nome VARCHAR(100),endereco VARCHAR(100), email VARCHAR(100));')
-
+    #cursor.execute('CREATE TABLE gerentes(id int, nome VARCHAR(100),endereco VARCHAR(100), email VARCHAR(100));')
 ## Alterando nome da tabela
     #cursor.execute('ALTER TABLE usuarios RENAME TO usuario')
 
@@ -26,6 +26,9 @@ cursor = conexao.cursor()
     #cursor.execute('INSERT INTO usuario(id,nome,endereco,email,telefone) VALUES(1,"Isadora", "França", "isa@gmail.com",1234567)')
     #cursor.execute('INSERT INTO usuario(id,nome,endereco,email,telefone) VALUES(2,"Maria", "São Paulo", "maria@gmail.com",1224567)')
     #cursor.execute('INSERT INTO usuario(id,nome,endereco,email,telefone) VALUES(3,"João", "França", "joao@gmail.com",1234767)')
+    #cursor.execute('INSERT INTO gerentes(id,nome,endereco,email) VALUES(1,"Roberta", "França", "beta@gmail.com")')
+    #cursor.execute('INSERT INTO gerentes(id,nome,endereco,email) VALUES(2,"Roberto", "Curitiba", "beta@gmail.com")')
+    #cursor.execute('INSERT INTO gerentes(id,nome,endereco,email) VALUES(3,"João", "França", "joao@gmail.com")')
 
 ## Excluindo informações da tabela
     #cursor.execute('DELETE FROM usuario where id=1')
@@ -51,11 +54,35 @@ cursor = conexao.cursor()
         #print(usuario)
 
 ## Retornar informações diferentes
-dados = cursor.execute('SELECT DISTINCT* FROM usuario')
+    #dados = cursor.execute('SELECT DISTINCT* FROM usuario')
+    #for usuario in dados:
+        #print(usuario)   
+
+### As clausulas podem ser adicionadas em conjunto
+
+## Agrupar dados por alguma condição [GROUP BY]
+    #dados = cursor.execute('SELECT nome FROM usuario GROUP BY nome HAVING id>2') 
+    #for usuario in dados:
+        #print(usuario)   
+            ###WHERE: antes do processo de agregação 
+            ###HAVING: depois do agrupamento
+
+## Combinando informações de tabelas diferentes [JOIN]
+    ## Correspondencia entre tabelas, aparece apenas o que tem nas duas [INNER JOIN]
+        #dados = cursor.execute('SELECT * FROM usuario INNER JOIN gerentes ON usuario.id = gerentes.id') 
+        #for usuario in dados:
+            #print(usuario) 
+    ## Retorna todas as linhas da tabela esquerda que corresponde a outra tabela, se não tiver retorna nulo  [LEFT JOIN]
+        #dados = cursor.execute('SELECT * FROM usuario RIGHT JOIN gerentes ON usuario.nome = gerentes.nome') 
+        #for usuario in dados:
+        #print(usuario)   
+
+        #E tem o RIGHT JOIN
+
+    ## Retorna todas as linhas, junção completa [FULL JOIN]
+dados = cursor.execute('SELECT * FROM usuario FULL JOIN gerentes ON usuario.nome = gerentes.nome') 
 for usuario in dados:
-    print(usuario)   
-
-
+    print(usuario)
 
 #Envio das informações/alterações para o banco 
 conexao.commit()
